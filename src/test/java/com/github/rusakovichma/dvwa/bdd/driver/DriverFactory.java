@@ -1,4 +1,4 @@
-package com.github.rusakovichma.driver;
+package com.github.rusakovichma.dvwa.bdd.driver;
 
 import com.github.rusakovichma.dvwa.bdd.Driver;
 import com.github.rusakovichma.dvwa.bdd.DriverHelper;

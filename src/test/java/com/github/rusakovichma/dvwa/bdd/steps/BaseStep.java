@@ -1,10 +1,9 @@
-package com.github.rusakovichma.steps;
+package com.github.rusakovichma.dvwa.bdd.steps;
 
-import com.github.rusakovichma.DvwaSettings;
-import com.github.rusakovichma.driver.DriverFactory;
+import com.github.rusakovichma.dvwa.bdd.driver.DriverFactory;
 import com.github.rusakovichma.dvwa.bdd.Driver;
-import com.github.rusakovichma.features.AuthFeature;
-import com.github.rusakovichma.features.BaseFeature;
+import com.github.rusakovichma.dvwa.bdd.features.AuthFeature;
+import com.github.rusakovichma.dvwa.bdd.features.BaseFeature;
 import org.openqa.selenium.WebDriver;
 
 public abstract class BaseStep {

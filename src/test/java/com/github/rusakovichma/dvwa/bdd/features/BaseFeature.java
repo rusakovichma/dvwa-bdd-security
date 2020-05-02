@@ -1,7 +1,6 @@
-package com.github.rusakovichma.features;
+package com.github.rusakovichma.dvwa.bdd.features;
 
-import com.github.rusakovichma.DvwaSettings;
-import org.apache.http.protocol.UriHttpRequestHandlerMapper;
+import com.github.rusakovichma.dvwa.bdd.DvwaSettings;
 import org.openqa.selenium.WebDriver;
 
 public class BaseFeature {

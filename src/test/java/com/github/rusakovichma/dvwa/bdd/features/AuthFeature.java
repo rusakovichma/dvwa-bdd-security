@@ -1,9 +1,7 @@
-package com.github.rusakovichma.features;
+package com.github.rusakovichma.dvwa.bdd.features;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import java.net.URI;
 
 public class AuthFeature extends BaseFeature{
 

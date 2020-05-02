@@ -1,4 +1,4 @@
-package com.github.rusakovichma.steps;
+package com.github.rusakovichma.dvwa.bdd.steps;
 
 import static org.junit.Assert.assertTrue;
 

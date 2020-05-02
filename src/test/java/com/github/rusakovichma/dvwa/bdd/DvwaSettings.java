@@ -1,4 +1,4 @@
-package com.github.rusakovichma;
+package com.github.rusakovichma.dvwa.bdd;
 
 public interface DvwaSettings {
 

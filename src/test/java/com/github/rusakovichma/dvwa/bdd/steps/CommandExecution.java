@@ -1,4 +1,4 @@
-package com.github.rusakovichma.steps;
+package com.github.rusakovichma.dvwa.bdd.steps;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
