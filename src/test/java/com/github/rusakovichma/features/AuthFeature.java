@@ -3,11 +3,14 @@ package com.github.rusakovichma.features;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AuthFeature {
+import java.net.URI;
+
+public class AuthFeature extends BaseFeature{
 
     private final WebDriver webDriver;
 
     public AuthFeature(WebDriver webDriver) {
+        super(webDriver);
         this.webDriver = webDriver;
     }
 
@@ -22,6 +25,6 @@ public class AuthFeature {
     }
 
     public void logout(){
-        webDriver.navigate().to("/logout.php");
+        webDriver.get("http://localhost/logout.php");
     }
 }

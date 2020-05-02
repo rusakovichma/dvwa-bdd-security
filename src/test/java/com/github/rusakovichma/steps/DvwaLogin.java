@@ -6,6 +6,8 @@ import com.github.rusakovichma.driver.DriverFactory;
 import com.github.rusakovichma.dvwa.bdd.Driver;
 import com.github.rusakovichma.features.AuthFeature;
 import java.util.concurrent.TimeUnit;
+
+import cucumber.api.java.en.And;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import cucumber.api.java.en.Given;
@@ -27,16 +29,40 @@ public class DvwaLogin
         driver.get("http://localhost/login.php");
     }
 
-    @When("^user enters admin and password$")
-    public void user_enters_admin_and_password() throws Throwable {
-        authFeature.login("admin", "password");
+    @When("^user enters '(.*)' and '(.*)'$")
+    public void user_enters_admin_and_password(String username, String password) throws Throwable {
+        authFeature.login(username, password);
     }
 
-    @Then("^Home page is displayed$")
-    public void success_message_is_displayed() throws Throwable {
-        String exp_message = "Welcome to Damn Vulnerable Web Application!";
+    @Then("^the message '(.*)' is displayed$")
+    public void success_message_is_displayed(String welcomeMessage) throws Throwable {
         String actual = driver.findElement(By.xpath("//div[@id='main_body']//h1")).getText();
-        Assert.assertEquals(exp_message, actual);
-        DriverFactory.closeDriver();
+        Assert.assertEquals(welcomeMessage, actual);
+        authFeature.logout();
+    }
+
+    @Given("^user login the application with '(.*)' and '(.*)'$")
+    public void user_login_the_application_with_admin_and_password(String username, String password) throws Throwable {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.get("http://localhost/login.php");
+        authFeature.login(username, password);
+    }
+
+    @When("^user perform logout$")
+    public void user_perform_logout() throws Throwable {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        authFeature.logout();
+    }
+
+    @Then("^the users returns to the Home page$")
+    public void the_users_returns_to_the_Home_page() throws Throwable {
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        assertTrue(driver.getCurrentUrl().endsWith("login.php"));
+    }
+
+    @And("^he sees the '(.*)' message$")
+    public void he_sees_the_You_have_logged_out_message(String logoutMessage) throws Throwable {
+        String actualMessage = driver.findElement(By.xpath("//div[@id='content']//div[@class='message']")).getText();
+        Assert.assertEquals(logoutMessage, actualMessage);
     }
 }
