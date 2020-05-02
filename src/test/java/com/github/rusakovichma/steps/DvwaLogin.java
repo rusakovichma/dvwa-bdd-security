@@ -2,31 +2,24 @@ package com.github.rusakovichma.steps;
 
 import static org.junit.Assert.assertTrue;
 
-import com.github.rusakovichma.driver.DriverFactory;
-import com.github.rusakovichma.dvwa.bdd.Driver;
-import com.github.rusakovichma.features.AuthFeature;
 import java.util.concurrent.TimeUnit;
 
 import cucumber.api.java.en.And;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 
 /**
- * Login test for simple App.
+ * Login test for DVWA.
  */
-public class DvwaLogin
-{
-    private static WebDriver driver = DriverFactory.createDriver(Driver.Chrome);
-    private AuthFeature authFeature = new AuthFeature(driver);
+public class DvwaLogin extends BaseStep {
 
     @Given("^user is on DVMA homepage$")
     public void user_is_on_DVMA_homepage() throws Throwable {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("http://localhost/login.php");
+        authFeature.goHome();
     }
 
     @When("^user enters '(.*)' and '(.*)'$")
@@ -38,20 +31,19 @@ public class DvwaLogin
     public void success_message_is_displayed(String welcomeMessage) throws Throwable {
         String actual = driver.findElement(By.xpath("//div[@id='main_body']//h1")).getText();
         Assert.assertEquals(welcomeMessage, actual);
-        authFeature.logout();
+        authFeature.goLogout();
     }
 
     @Given("^user login the application with '(.*)' and '(.*)'$")
     public void user_login_the_application_with_admin_and_password(String username, String password) throws Throwable {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        driver.get("http://localhost/login.php");
-        authFeature.login(username, password);
+        authFeature.goHomeAndLogin(username, password);
     }
 
     @When("^user perform logout$")
     public void user_perform_logout() throws Throwable {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        authFeature.logout();
+        authFeature.goLogout();
     }
 
     @Then("^the users returns to the Home page$")

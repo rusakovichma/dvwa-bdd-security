@@ -14,17 +14,26 @@ public class AuthFeature extends BaseFeature{
         this.webDriver = webDriver;
     }
 
+    public void goHome(){
+        goTo("login.php");
+    }
+
     public void login(String username, String password){
         webDriver.findElement(By.name("username")).sendKeys(username);
         webDriver.findElement(By.name("password")).sendKeys(password);
         webDriver.findElement(By.name("Login")).click();
     }
 
+    public void goHomeAndLogin(String username, String password){
+        goHome();
+        login(username, password);
+    }
+
     public String getLoginMessage(){
         return webDriver.findElement(By.className("message")).getText();
     }
 
-    public void logout(){
-        webDriver.get("http://localhost/logout.php");
+    public void goLogout(){
+        goTo("logout.php");
     }
 }
