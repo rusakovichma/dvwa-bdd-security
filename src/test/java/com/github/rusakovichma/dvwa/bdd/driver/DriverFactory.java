@@ -34,6 +34,7 @@ public class DriverFactory {
 
     public synchronized static void closeAndDestroyDriver(){
         closeDriver();
+        webDriverInstance.close();
         webDriverInstance = null;
     }
 
