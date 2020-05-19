@@ -1,4 +1,4 @@
-package com.github.rusakovichma.dvwa.bdd.steps;
+package com.github.rusakovichma.dvwa.bdd.attacks;
 
 import com.github.rusakovichma.dvwa.bdd.nc.NetCat;
 import com.github.rusakovichma.dvwa.bdd.nc.NetCatOptions;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import static junit.framework.TestCase.assertTrue;
 
-public class CommandExecution extends BaseStep {
+public class CommandExecutionAttack extends BaseAttack {
 
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 

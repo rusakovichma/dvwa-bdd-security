@@ -1,4 +1,4 @@
-package com.github.rusakovichma.dvwa.bdd.steps;
+package com.github.rusakovichma.dvwa.bdd.attacks;
 
 import static org.junit.Assert.assertTrue;
 
@@ -14,7 +14,7 @@ import org.junit.Assert;
 /**
  * Login test for DVWA.
  */
-public class DvwaLogin extends BaseStep {
+public class DvwaLoginAttack extends BaseAttack {
 
     @Given("^user is on DVMA homepage$")
     public void user_is_on_DVMA_homepage() throws Throwable {

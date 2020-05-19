@@ -8,10 +8,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/CommandExecution.feature",
-        glue= {"com.github.rusakovichma.dvwa.bdd.steps"}
+        features = "src/test/resources/features/DvwaLoginAttack.feature",
+        glue= {"com.github.rusakovichma.dvwa.bdd.attacks"}
 )
-public class CommandExecutionRunner {
+public class DvwaLoginAttackRunner {
 
     @AfterClass
     public static void teardown() {
