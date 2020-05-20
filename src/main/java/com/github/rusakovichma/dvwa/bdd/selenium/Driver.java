@@ -1,4 +1,4 @@
-package com.github.rusakovichma.dvwa.bdd;
+package com.github.rusakovichma.dvwa.bdd.selenium;
 
 public enum Driver {
     Gecko("webdriver.gecko.driver", "geckodriver"),

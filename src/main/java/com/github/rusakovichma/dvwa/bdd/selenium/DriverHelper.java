@@ -1,4 +1,6 @@
-package com.github.rusakovichma.dvwa.bdd;
+package com.github.rusakovichma.dvwa.bdd.selenium;
+
+import com.github.rusakovichma.dvwa.bdd.util.OsCheck;
 
 import java.io.File;
 

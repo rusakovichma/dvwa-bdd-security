@@ -1,7 +1,7 @@
 package com.github.rusakovichma.dvwa.bdd.driver;
 
-import com.github.rusakovichma.dvwa.bdd.Driver;
-import com.github.rusakovichma.dvwa.bdd.DriverHelper;
+import com.github.rusakovichma.dvwa.bdd.selenium.Driver;
+import com.github.rusakovichma.dvwa.bdd.selenium.DriverHelper;
 import com.github.rusakovichma.dvwa.bdd.DvwaSettings;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;

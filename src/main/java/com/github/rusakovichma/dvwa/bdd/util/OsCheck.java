@@ -1,4 +1,4 @@
-package com.github.rusakovichma.dvwa.bdd;
+package com.github.rusakovichma.dvwa.bdd.util;
 
 import java.util.Locale;
 
