@@ -14,7 +14,7 @@ import org.junit.Assert;
 /**
  * Login test for DVWA.
  */
-public class DvwaLoginAttack extends BaseAttack {
+public class DvwaLoginAttack extends ChromeBasedAttack {
 
     @Given("^user is on DVMA homepage$")
     public void user_is_on_DVMA_homepage() throws Throwable {

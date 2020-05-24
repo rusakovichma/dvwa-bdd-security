@@ -9,9 +9,6 @@ public class DriverHelper {
     private static final String DRIVER_BASE_PATH = "src/main/resources/drivers";
 
     private static String getDriverPath(Driver driver){
-        if (driver == Driver.Gecko){
-            throw new UnsupportedOperationException("The driver is not supported");
-        }
         StringBuilder pathBuilder = new StringBuilder(DRIVER_BASE_PATH)
                 .append(File.separator)
                 .append(driver.name().toLowerCase())
@@ -42,9 +39,6 @@ public class DriverHelper {
     }
 
     public static void setupDriver(Driver driver){
-        if (driver == Driver.Gecko){
-            throw new UnsupportedOperationException("The driver is not supported");
-        }
         System.setProperty(driver.getDriverProp(), getDriverPath(driver));
     }
 

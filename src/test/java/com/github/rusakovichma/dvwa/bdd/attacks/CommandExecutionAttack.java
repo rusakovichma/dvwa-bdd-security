@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import static junit.framework.TestCase.assertTrue;
 
-public class CommandExecutionAttack extends BaseAttack {
+public class CommandExecutionAttack extends ChromeBasedAttack {
 
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 

@@ -8,9 +8,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.github.rusakovichma.dvwa.bdd.DvwaSettings.ZAP_ADDRESS;
+import static com.github.rusakovichma.dvwa.bdd.DvwaSettings.ZAP_PORT;
 
 public class DriverFactory {
 
@@ -24,7 +29,7 @@ public class DriverFactory {
         options.addArguments(getChromeZapProxyArgs());
 
         Proxy proxy = new Proxy();
-        proxy.setHttpProxy("localhost:8989");
+        proxy.setHttpProxy(String.format("%s:%d", ZAP_ADDRESS, ZAP_PORT));
         options.setCapability("proxy", proxy);
 
         return options;
@@ -32,10 +37,25 @@ public class DriverFactory {
 
     private static List<String> getChromeZapProxyArgs() {
         List<String> chromeSwitches = new ArrayList<String>();
-        chromeSwitches.add(String.format("--proxy-server=http://%s:%d",
-                DvwaSettings.ZAP_ADDRESS, DvwaSettings.ZAP_PORT));
+        chromeSwitches.add(String.format("--proxy-server=%s:%d",
+                ZAP_ADDRESS, ZAP_PORT));
         chromeSwitches.add("--ignore-certificate-errors");
+        chromeSwitches.add("--proxy-bypass-list=<-loopback>");
         return chromeSwitches;
+    }
+
+    private static FirefoxOptions getFirefoxOptions(){
+        FirefoxProfile profile = new FirefoxProfile();
+
+        profile.setPreference("network.proxy.allow_hijacking_localhost", "true");
+        profile.setPreference("network.proxy.type", 1);
+        profile.setPreference("network.proxy.http", ZAP_ADDRESS);
+        profile.setPreference("network.proxy.http_port", ZAP_PORT);
+
+        FirefoxOptions options = new FirefoxOptions();
+        options.setProfile(profile);
+
+        return options;
     }
 
     public synchronized static WebDriver createDriver(Driver driver){
@@ -43,9 +63,11 @@ public class DriverFactory {
             DriverHelper.setupDriver(driver);
             switch (driver){
                 case Gecko:
-                    webDriverInstance = new FirefoxDriver();
+                    webDriverInstance = new FirefoxDriver(getFirefoxOptions());
+                    break;
                 case Chrome:
                     webDriverInstance = new ChromeDriver(getChromeOptions());
+                    break;
             }
         }
         return webDriverInstance;
