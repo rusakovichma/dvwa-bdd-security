@@ -23,13 +23,7 @@ public class CommandExecutionAttack extends ChromeBasedAttack {
     private NetCat netCatClient;
     private ByteArrayOutputStream ncClientOut = new ByteArrayOutputStream();
     private ByteArrayInputStream ncClientIn = new ByteArrayInputStream(new byte[200]);
-
-    @Given("^user logins with '(.*)' and '(.*)'$")
-    public void user_login(String username, String password) throws Throwable {
-        authFeature.goHomeAndLogin(username, password);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    }
-
+    
     @And("^go to '(.*)' page$")
     public void go_to_vulnerabilities_exec_page(String path) {
         baseFeature.goTo(path);

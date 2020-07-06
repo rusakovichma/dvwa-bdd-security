@@ -4,7 +4,7 @@ import com.github.rusakovichma.dvwa.bdd.driver.DriverFactory;
 import com.github.rusakovichma.dvwa.bdd.selenium.Driver;
 import org.openqa.selenium.WebDriver;
 
-class GeckoBasedAttack extends BaseAttack{
+abstract class GeckoBasedAttack extends BaseAttack {
 
     @Override
     public WebDriver createDriver() {
