@@ -31,8 +31,6 @@ public class SqlInjectionAttack extends ChromeBasedAttack {
             assertTrue(exposedUserData.contains(usersData.get(i).get(0)));
             assertTrue(exposedUserData.contains(usersData.get(i).get(1)));
         }
-
-
     }
 
 }
