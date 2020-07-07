@@ -7,7 +7,7 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 
 import java.util.List;
-import java.util.Map;
+import java.util.regex.Pattern;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -42,6 +42,15 @@ public class SqlInjectionAttack extends ChromeBasedAttack {
         assertTrue(exposedData.contains(databaseVersion));
     }
 
+    @Then("^user see (\\d+) users and database user '(.*)'$")
+    public void user_see_users_and_database_user(int usersNumber, String databaseUser) throws Throwable {
+        String exposedData = driver.findElement(By.xpath(
+                String.format("//div[@class='vulnerable_code_area']//pre[%d]", usersNumber + 1)))
+                .getText();
+
+        assertTrue(exposedData.contains(databaseUser));
+    }
+
     @Then("^user see (\\d+) users and database name '(.*)'$")
     public void user_see_users_and_database_name(int usersNumber, String databaseName) throws Throwable {
         String exposedData = driver.findElement(By.xpath(
@@ -61,5 +70,17 @@ public class SqlInjectionAttack extends ChromeBasedAttack {
 
             assertTrue(exposedUserData.contains(tablesData.get(i)));
         }
+    }
+
+    @Then("^user see the '(.*)' user data and password md5 hash$")
+    public void user_see_admin_password_hash(String userName) throws Throwable {
+        String exposedData = driver.findElement(By.xpath(
+                "//div[@class='vulnerable_code_area']//pre[1]"))
+                .getText();
+
+        assertTrue(exposedData.contains(userName));
+
+        Pattern md5Pattern = Pattern.compile("[a-f0-9]{32}");
+        assertTrue(md5Pattern.matcher(exposedData).find());
     }
 }

