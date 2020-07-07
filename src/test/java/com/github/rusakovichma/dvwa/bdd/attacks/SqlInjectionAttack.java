@@ -22,10 +22,10 @@ public class SqlInjectionAttack extends ChromeBasedAttack {
 
     @Then("^user gains access to the following list of users$")
     public void user_gains_access_to_the_following_list_of_users(DataTable usersTable) throws Throwable {
-        List<List<String>> usersData =  usersTable.asLists(String.class);
+        List<List<String>> usersData = usersTable.asLists(String.class);
         for (int i = 0; i < usersData.size(); i++) {
             String exposedUserData = driver.findElement(By.xpath(
-                    String.format("//div[@class='vulnerable_code_area']//pre[%d]", i+1)))
+                    String.format("//div[@class='vulnerable_code_area']//pre[%d]", i + 1)))
                     .getText();
 
             assertTrue(exposedUserData.contains(usersData.get(i).get(0)));
@@ -33,4 +33,12 @@ public class SqlInjectionAttack extends ChromeBasedAttack {
         }
     }
 
+    @Then("^user see (\\d+) users and database '(.*)' version$")
+    public void user_see_users_and_database_MariaDB_deb_u_version(int usersNumber, String databaseVersion) throws Throwable {
+        String exposedData = driver.findElement(By.xpath(
+                String.format("//div[@class='vulnerable_code_area']//pre[%d]", usersNumber + 1)))
+                .getText();
+
+        assertTrue(exposedData.contains(databaseVersion));
+    }
 }
