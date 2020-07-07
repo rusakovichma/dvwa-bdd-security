@@ -41,4 +41,25 @@ public class SqlInjectionAttack extends ChromeBasedAttack {
 
         assertTrue(exposedData.contains(databaseVersion));
     }
+
+    @Then("^user see (\\d+) users and database name '(.*)'$")
+    public void user_see_users_and_database_name(int usersNumber, String databaseName) throws Throwable {
+        String exposedData = driver.findElement(By.xpath(
+                String.format("//div[@class='vulnerable_code_area']//pre[%d]", usersNumber + 1)))
+                .getText();
+
+        assertTrue(exposedData.contains(databaseName));
+    }
+
+    @Then("^user see the tables in information_schema$")
+    public void user_gains_access_to_the_tables_in_information_schema(DataTable infoSchemaTables) throws Throwable {
+        List<String> tablesData = infoSchemaTables.asList(String.class);
+        for (int i = 0; i < tablesData.size(); i++) {
+            String exposedUserData = driver.findElement(By.xpath(
+                    String.format("//div[@class='vulnerable_code_area']//pre[%d]", i + 1)))
+                    .getText();
+
+            assertTrue(exposedUserData.contains(tablesData.get(i)));
+        }
+    }
 }
