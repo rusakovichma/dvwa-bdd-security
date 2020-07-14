@@ -1,4 +1,4 @@
-package com.github.rusakovichma.dvwa.bdd.selenium;
+package com.github.rusakovichma.dvwa.bdd.selenium.driver;
 
 import com.github.rusakovichma.dvwa.bdd.util.OsCheck;
 

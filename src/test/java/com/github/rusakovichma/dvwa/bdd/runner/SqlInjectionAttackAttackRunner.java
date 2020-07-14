@@ -1,20 +1,26 @@
 package com.github.rusakovichma.dvwa.bdd.runner;
 
-import com.github.rusakovichma.dvwa.bdd.driver.DriverFactory;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features/SqlInjectionAttack.feature",
-        glue= {"com.github.rusakovichma.dvwa.bdd.attacks"}
+        glue = {"com.github.rusakovichma.dvwa.bdd.attacks"}
 )
-public class SqlInjectionAttackRunner {
+public class SqlInjectionAttackAttackRunner extends DvwaAttackRunner {
+
+    @BeforeClass
+    public static void setup() {
+        setUpProxy();
+    }
 
     @AfterClass
     public static void teardown() {
-        DriverFactory.closeAndDestroyDriver();
+        destroyDriver();
     }
 }
